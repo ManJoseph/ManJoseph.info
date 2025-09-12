@@ -13,7 +13,7 @@ I enjoy turning ideas into real solutions — from crafting smooth user interfac
 ## 🛠️ Tech Stack
 - **Frontend:** React.js, Angular, Vue.js, SwiftUI  
 - **Backend:** Node.js (Express/Nest.js), Java (Spring Boot), Python (Django/FastAPI)  
-- **Databases:** MySQL, PostgreSQL, MongoDB, Firebase  
+- **Databases:** MySQL, PostgreSQL, MongoDB, Firebase, Oracle  
 - **Other Tools:** Git/GitHub, REST APIs, Agile, Cloud Deployment  
 
 ---
