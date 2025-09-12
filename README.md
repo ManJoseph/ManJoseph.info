@@ -36,9 +36,9 @@ Here are some of my highlighted works:
 ---
 
 ## 📫 Get in Touch
-- LinkedIn: [[Your LinkedIn Link](https://www.linkedin.com/in/manjoseph/)]  
-- GitHub: [[Your GitHub Profile Link](https://github.com/ManJoseph)]  
-- Email: [Your Email Here](josephmanizabayo7@gmail.com)
+- LinkedIn: [[My LinkedIn](https://www.linkedin.com/in/manjoseph/)]  
+- GitHub: [[My GitHub Profile](https://github.com/ManJoseph)]  
+- Email: [[My Email](josephmanizabayo7@gmail.com)]
 
 ---
 
