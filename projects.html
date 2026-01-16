@@ -3,79 +3,134 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" sizes="180x180" href="favs/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favs/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favs/favicon-16x16.png">
+    <link rel="icon" href="favs/favicon.ico">
     <title>My Projects - Joseph Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Fixed Sidebars -->
+    <div class="side-socials">
+        <a href="https://github.com/ManJoseph" target="_blank"><i class="fa-brands fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/manjoseph/" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="mailto:josephmanizabayo7@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+    </div>
+
+    <!-- Added data-target to map click to section ID -->
+    <div class="page-progress">
+        <div class="progress-item active" data-target="#project1">01</div>
+        <div class="progress-item" data-target="#project2">02</div>
+        <div class="progress-item" data-target="#project3">03</div>
+    </div>
+
+    <!-- Navigation -->
     <nav class="navbar">
         <a href="index.html" class="logo">ManJoseph</a>
         <ul class="nav-links">
             <li><a href="index.html#home">Home</a></li>
             <li><a href="index.html#skills">About</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="index.html#contact">Contact</a></li>
+            <li><a href="projects.html" class="active">Projects</a></li>
+            <li><a href="contacts.html">Contact</a></li>
         </ul>
     </nav>
 
-    <section id="projects" class="projects">
-        <h2>My Projects</h2>
-        <div class="projects-grid">
-            <!-- Project Card 1 -->
-            <div class="project-card">
-                <img src="project2.png" alt="UbugeniPalace" class="project-image">
-                <div class="project-info">
-                    <h3>UbugeniPalace Platform</h3>
-                    <p>UbugeniPalace is a web-based e-commerce platform designed to empower Rwandan artisans 
-by providing a digital marketplace to showcase and sell their authentic handmade crafts to 
-customers worldwide.</p>
-                    <div class="project-links">
-                        <a href="#" class="live-demo">Visit Site</a>
-                        <a href="#" class="source-code">Source Code</a>
-                    </div>
-                </div>
+    <!-- Project 1: UbugeniPalace -->
+    <section class="project-showcase reveal" id="project1">
+        <div class="showcase-content">
+            <span class="project-label">PROJECT 01</span>
+            <h2 class="project-title">UbugeniPalace<br>Platform</h2>
+            <p class="project-desc">
+                A digital marketplace empowering Rwandan artisans. UbugeniPalace connects local craftsmanship with a global audience, featuring a secure e-commerce flow, real-time inventory updates, and an artisan dashboard for managing products.
+            </p>
+            <div class="project-tech">
+                <span class="tech-pill">PHP</span>
+                <span class="tech-pill">MySQL</span>
+                <span class="tech-pill">JavaScript</span>
+                <span class="tech-pill">E-Commerce</span>
             </div>
-
-            <!-- Project Card 2 -->
-            <div class="project-card">
-                <img src="project1.png" alt="Task Management App" class="project-image">
-                <div class="project-info">
-                    <h3>StoreMinder Inventory Management App</h3>
-                    <p>StoreMinder is designed for small to medium-sized retail businesses, hardware stores, 
-and quincaillerie shops in Rwanda. It empowers business owners and store managers to efficiently 
-manage inventory, track sales, generate reports, and handle customer transactions.</p>
-                    <div class="project-links">
-                        <a href="#" class="live-demo">Visit Site</a>
-                        <a href="#" class="source-code">Source Code</a>
-                    </div>
-                </div>
+            <div class="project-links">
+                <a href="contacts.html" class="cta-button">Interested</a>
+                <a href="https://github.com/ManJoseph/UbugeniPalace" class="cta-button" style="background: transparent; color: var(--text);">Source Code</a>
             </div>
-
-            <!-- Project Card 3 -->
-            <div class="project-card">
-                <img src="project3.png" alt="Portfolio Website" class="project-image">
-                <div class="project-info">
-                    <h3>Portfolio Website</h3>
-                    <p>A responsive portfolio website built with HTML, CSS, and JavaScript</p>
-                    <div class="project-links">
-                        <a href="https://manjoseph.github.io/ManJoseph.info/" class="live-demo">Visit Site</a>
-                        <a href="https://github.com/ManJoseph/ManJoseph.info" class="source-code">Source Code</a>
-                    </div>
-                </div>
-            </div>
+        </div>
+        <div class="showcase-image">
+            <img src="project2.png" alt="UbugeniPalace" class="showcase-img">
         </div>
     </section>
 
+    <!-- Project 2: SmartCashPower -->
+    <section class="project-showcase reveal" id="project2">
+        <div class="showcase-content">
+            <span class="project-label">PROJECT 02</span>
+            <h2 class="project-title">SmartCashPower<br>System</h2>
+            <p class="project-desc">
+                Power Your Home The Smart Way. A comprehensive utility management system allowing users to buy electricity tokens, monitor usage in real-time, and track transaction history across web and mobile platforms.
+            </p>
+            <div class="project-tech">
+                <span class="tech-pill">Spring Boot</span>
+                <span class="tech-pill">React</span>
+                <span class="tech-pill">PostgreSQL</span>
+                <span class="tech-pill">FinTech</span>
+            </div>
+            <div class="project-links">
+                <a href="contacts.html" class="cta-button">Interested</a>
+                <a href="https://github.com/ManJoseph/Smart-Cash-Power" class="cta-button" style="background: transparent; color: var(--text);">Source Code</a>
+            </div>
+        </div>
+        <div class="showcase-image">
+            <img src="smartcashpower.png" alt="SmartCashPower" class="showcase-img">
+        </div>
+    </section>
+
+    <!-- Project 3: QueueHive -->
+    <section class="project-showcase reveal" id="project3">
+        <div class="showcase-content">
+            <span class="project-label">PROJECT 03</span>
+            <h2 class="project-title">QueueHive<br>Solution</h2>
+            <p class="project-desc">
+                Eliminating physical queues with digital innovation. QueueHive provides a real-time token generation system where customers can select services remotely and track their turn, streamlining operations for service-based businesses.
+            </p>
+            <div class="project-tech">
+                <span class="tech-pill">Django</span>
+                <span class="tech-pill">Python</span>
+                <span class="tech-pill">WebSockets</span>
+                <span class="tech-pill">Real-time</span>
+            </div>
+            <div class="project-links">
+                <a href="contacts.html" class="cta-button">Interested</a>
+                <a href="https://github.com/ManJoseph/QueueHive" class="cta-button" style="background: transparent; color: var(--text);">Source Code</a>
+            </div>
+        </div>
+        <div class="showcase-image">
+            <img src="queuehive.png" alt="QueueHive" class="showcase-img">
+        </div>
+    </section>
+
+    <!-- Restored Footer with Social Links -->
     <footer>
         <p>&copy; 2025 Joseph Portfolio. All rights reserved.</p>
         <div class="social-links">
-            <a href="https://github.com/ManJoseph"><i class="fa-brands fa-github"></i></a>
-            <a href="https://www.linkedin.com/in/manjoseph/"><i class="fa-brands fa-linkedin"></i></a>
-            <a href="https://www.instagram.com/man.jo.se.ph/"><i class="fa-brands fa-instagram"></i></a>
-            <a href="https://wa.me/250784461730?text=Hello%20I%20found%20your%20website!"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="https://github.com/ManJoseph" target="_blank"><i class="fa-brands fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/manjoseph/" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="https://www.instagram.com/man.jo.se.ph/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://wa.me/250784461730?text=Hello%20I%20found%20your%20website!" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
         </div>
     </footer>
 
     <script src="script.js"></script>
+    <script>
+        // Inline script to handle click if script.js isn't caching or to ensure it works
+        document.querySelectorAll('.progress-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const target = this.getAttribute('data-target');
+                if(target) {
+                    document.querySelector(target).scrollIntoView({behavior: 'smooth'});
+                }
+            });
+        });
+    </script>
 </body>
 </html>

@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" sizes="180x180" href="favs/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favs/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favs/favicon-16x16.png">
+    <link rel="icon" href="favs/favicon.ico">
     <title>Joseph Portfolio</title>
     <!-- link to fontawesome for inserting social media icons-->
      <link rel="stylesheet" 
@@ -13,66 +17,146 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Fixed Sidebars -->
+    <div class="side-socials">
+        <a href="https://github.com/ManJoseph" target="_blank"><i class="fa-brands fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/manjoseph/" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="mailto:josephmanizabayo7@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+    </div>
+
+    <!-- Added data-target to map click to section ID -->
+    <div class="page-progress">
+        <div class="progress-item active" data-target="#home">01</div>
+        <div class="progress-item" data-target="#about">02</div>
+        <div class="progress-item" data-target="#certifications">03</div>
+        <div class="progress-item" data-target="#workflow">04</div>
+    </div>
+
     <!-- Navigation -->
-    <nav class="navbar"> 
-        <a  href="#home" class="logo">ManJoseph</a>
+    <nav class="navbar">
+        <a href="index.html" class="logo">ManJoseph</a>
         <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#skills">About</a></li>
+            <li><a href="#home" class="active">Home</a></li>
+            <li><a href="#about">About</a></li>
             <li><a href="projects.html">Projects</a></li>
             <li><a href="contacts.html">Contact</a></li>
         </ul>
     </nav>
 
-    <!-- Hero section-->
+    <!-- Hero Section -->
     <section id="home" class="hero">
-        <div class="hero-content">
-            <h1>Full-stack Developer</h1>
-            <p>Building digital experiences that merge creativity with technology.</p>
-            <p class="highlight">Specializing in modern web development and cyber systems</p>
+        <div class="hero-content reveal active">
+            <h1>Full-Stack<br>Software Engineer.</h1>
+            <p class="hero-greeting">Hi, I'm Joseph Manizabayo.</p>
+            <p class="hero-subtitle">
+                Focused on building scalable backend systems, seamless mobile experiences, and digital products that make a difference.
+            </p>
             <a href="contacts.html" class="cta-button">Let's Connect</a>
         </div>
-        <div class="hero-image">
-            <img src="Portfolio.jpg" alt="Hero Image" class="profile-img">
+        <!-- Restored Hero Image -->
+        <div class="hero-image-container reveal">
+            <img src="Portfolio.jpg" alt="Joseph Manizabayo" class="profile-img">
         </div>
     </section>
 
-    <!-- skills Section-->
-
-    <section id="skills" class="skills">
-        <h2>Technical Expertise</h2>
+    <!-- About Section -->
+    <section id="about" class="immersive-section reveal">
+        <h2>About Me</h2>
+        <p style="max-width: 800px; color: var(--text-muted); font-size: 1.2rem; margin-bottom: 3rem;">
+            My journey in technology is driven by a genuine passion for solving complex problems through clean, robust code. I don't just write software; I craft digital experiences that merge technical excellence with intuitive design. Whether it's architecting a high-load backend or polishing a mobile UI, I am obsessed with quality and impact.
+        </p>
+        
         <div class="skills-grid">
             <div class="skill-card">
                 <i class="fa-solid fa-code"></i>
-                <p><b>Frontend Development</b></p>
-                <p>HTML, CSS, JavaScript, React</p>
+                <p><b>Software Engineering</b></p>
+                <p>Django, Python, Java, JavaScript, RESTful APIs</p>
             </div>
             <div class="skill-card">
-                <i class="fa-solid fa-server"></i>
-                <p><b>Backend Development</b></p>
-                <p>Node.js, Python, MongoDB, PostgreSQL, mySQL, Oracle</p>
-            </div>
-            <div class="skill-card">
-                <i class="fa-solid fa-paintbrush"></i>
-                <p><b>UI/UX Design</b></p>
-                <p>Figma, Prototyping, Sketch</p>
+                <i class="fa-solid fa-wrench"></i>
+                <p><b>Testing & Tools</b></p>
+                <p>Postman, Git/GitHub, Docker, CI/CD</p>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- Certifications Section -->
+    <section id="certifications" class="immersive-section reveal">
+        <h2>Expertise & Certifications</h2>
+        <div class="skills-grid">
+             <div class="skill-card">
+                  <i class="fa-brands fa-python"></i>
+                  <p><b>Django & Python</b></p>
+                  <p>Advanced Backend Architecture</p>
+             </div>
+             <div class="skill-card">
+                  <i class="fa-brands fa-java"></i>
+                  <p><b>Spring Boot</b></p>
+                  <p>Enterprise Java Systems</p>
+             </div>
+             <div class="skill-card">
+                  <i class="fa-brands fa-php"></i>
+                  <p><b>PHP</b></p>
+                  <p>Dynamic Web Solutions</p>
+             </div>
+             <div class="skill-card">
+                  <i class="fa-solid fa-mobile-screen"></i>
+                  <p><b>Mobile Dev</b></p>
+                  <p>SwiftUI & iOS Development</p>
+             </div>
+        </div>
+    </section>
+
+    <!-- Workflow Section -->
+    <section id="workflow" class="immersive-section reveal">
+        <h2>Creative Workflow</h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <i class="fa-solid fa-list-check"></i>
+                <p><b>Agile Methodology</b></p>
+                <p>Scrum, Sprint Planning, Jira</p>
+            </div>
+             <div class="skill-card">
+                <i class="fa-solid fa-clipboard-list"></i>
+                <p><b>Project Management</b></p>
+                <p>Notion, Documentation, System Design</p>
+            </div>
+            <div class="skill-card">
+                <i class="fa-solid fa-palette"></i>
+                <p><b>Creative Design</b></p>
+                <p>Digital Assets & Visual Content</p>
+            </div>
+            <div class="skill-card">
+                <i class="fa-solid fa-video"></i>
+                <p><b>Content Creation</b></p>
+                <p>Video Editing & Storytelling</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Restored Footer with Social Links -->
     <footer>
         <p>&copy; 2025 Joseph Portfolio. All rights reserved.</p>
         <div class="social-links">
-            <a href="https://github.com/ManJoseph"><i class="fa-brands fa-github"></i></a>
-            <a href="https://www.linkedin.com/in/manjoseph/"><i class="fa-brands fa-linkedin"></i></a>
-            <a href="https://www.instagram.com/man.jo.se.ph/"><i class="fa-brands fa-instagram"></i></a>
-            <a href="https://wa.me/250784461730?text=Hello%20I%20found%20your%20website!"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="https://github.com/ManJoseph" target="_blank"><i class="fa-brands fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/manjoseph/" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="https://www.instagram.com/man.jo.se.ph/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://wa.me/250784461730?text=Hello%20I%20found%20your%20website!" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
         </div>
     </footer>
 
-    <!-- link to external JavaScript file -->
     <script src="script.js"></script>
+    <script>
+        // Inline script to handle click if script.js isn't caching or to ensure it works
+        document.querySelectorAll('.progress-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const target = this.getAttribute('data-target');
+                if(target) {
+                    document.querySelector(target).scrollIntoView({behavior: 'smooth'});
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

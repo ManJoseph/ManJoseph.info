@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" sizes="180x180" href="favs/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favs/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favs/favicon-16x16.png">
+    <link rel="icon" href="favs/favicon.ico">
     <title>Contact Me - Joseph Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
@@ -19,41 +23,50 @@
     </script>
 </head>
 <body>
+    <!-- Fixed Sidebars -->
+    <div class="side-socials">
+        <a href="https://github.com/ManJoseph" target="_blank"><i class="fa-brands fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/manjoseph/" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="mailto:josephmanizabayo7@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+    </div>
+
+    <!-- Added data-target but contacts usually doesn't have sections? 
+         Kept it simple or mapped to sections if they existed. 
+         Since contact is one page, maybe map to parts of it or just static.
+         User wanted "numbers to slide". Assuming purely scroll spy if sections exist. 
+    -->
+    <div class="page-progress">
+        <div class="progress-item">01</div>
+        <div class="progress-item">02</div>
+        <div class="progress-item">03</div>
+        <div class="progress-item active" data-target=".contact-hero">04</div>
+    </div>
+
+    <!-- Navigation -->
     <nav class="navbar">
         <a href="index.html" class="logo">ManJoseph</a>
         <ul class="nav-links">
             <li><a href="index.html#home">Home</a></li>
             <li><a href="index.html#skills">About</a></li>
             <li><a href="projects.html">Projects</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="contacts.html" class="active">Contact</a></li>
         </ul>
     </nav>
 
-    <section id="contact" class="contact">
-        <h2>Get In Touch</h2>
-        <div class="contact-container">
-            <div class="contact-info">
-                <img src="profile-contacts.jpg" alt="Joseph Profile" class="contact-image">
-                <div class="contact-details">
-                    <h3>Let's Create Something Amazing Together</h3>
-                    <p>I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions.</p>
-                    <div class="contact-methods">
-                        <div class="contact-item">
-                            <i class="fa-solid fa-envelope"></i>
-                            <p>Email: josephmanizabayo7@gmail.com</p>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fa-solid fa-phone"></i>
-                            <p>Phone: +250 784 461 730</p>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fa-solid fa-location-dot"></i>
-                            <p>Location: Kigali, Rwanda</p>
-                        </div>
-                    </div>
-                </div>
+    <section class="contact-hero reveal active">
+        <!-- Split Layout: Content Left, Form Right -->
+         <div class="contact-content">
+            <h1>Let's Create<br>Something Amazing.</h1>
+            <p style="color: var(--text-muted); margin-bottom: 2rem; font-size: 1.1rem;">
+                Have a project in mind? Looking for a partner who cares about your product as much as you do? Drop me a line.
+            </p>
+            <!-- Restored Contact Image -->
+            <div class="contact-visual">
+                <img src="profile-contacts.jpg" alt="Contact Joseph" class="contact-img">
             </div>
-            
+         </div>
+
+        <div class="contact-form-container">
             <form class="contact-form" id="contactForm" method="POST">
                 <div class="form-group">
                     <input type="text" 
@@ -86,27 +99,29 @@
                 <div class="form-group">
                     <textarea id="message" 
                               name="message" 
-                              placeholder="Your Message"
+                              placeholder="Tell me about your project..."
                               maxlength="1000"
                               required></textarea>
                 </div>
-                <button type="submit" class="submit-btn" onclick="sendMail()">Send Message</button>
+                <button type="submit" class="cta-button" style="background: transparent; width: 100%; margin-top: 1rem;" onclick="sendMail()">Send Message</button>
             </form>
         </div>
     </section>
 
+    <!-- Restored Footer with Social Links -->
     <footer>
         <p>&copy; 2025 Joseph Portfolio. All rights reserved.</p>
         <div class="social-links">
-            <a href="https://github.com/ManJoseph"><i class="fa-brands fa-github"></i></a>
-            <a href="https://www.linkedin.com/in/manjoseph/"><i class="fa-brands fa-linkedin"></i></a>
-            <a href="https://www.instagram.com/man.jo.se.ph/"><i class="fa-brands fa-instagram"></i></a>
-            <a href="https://wa.me/250784461730"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="https://github.com/ManJoseph" target="_blank"><i class="fa-brands fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/manjoseph/" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="https://www.instagram.com/man.jo.se.ph/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://wa.me/250784461730?text=Hello%20I%20found%20your%20website!" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
         </div>
     </footer>
 
     <!-- Toast Container -->
     <div class="toast-container"></div>
     <script src="contacts.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
