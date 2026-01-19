@@ -590,11 +590,133 @@ footer{
 .toast.error i { color: #e74c3c; }
 
 /* Responsive */
+/* Responsive */
+/* Tablet & Small Desktop */
 @media (max-width: 1024px) {
     .side-socials, .page-progress { display: none; }
     .hero, .immersive-section, .project-showcase, .contact-hero { padding: 5rem 5%; }
     .hero h1 { font-size: 3.5rem; }
     .project-showcase, .project-showcase:nth-child(even) { flex-direction: column-reverse; gap: 3rem; text-align: left; }
     .showcase-image { width: 100%; }
+}
+
+/* Mobile Navigation & Layout */
+.hamburger {
+    display: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: var(--accent);
+    z-index: 1001;
+}
+
+@media (max-width: 768px) {
+    /* Navigation */
+    .hamburger {
+        display: block;
+    }
+
+    .nav-links {
+        position: fixed;
+        right: -100%;
+        top: 0;
+        height: 100vh;
+        width: 70%;
+        background: rgba(10, 10, 10, 0.98);
+        backdrop-filter: blur(10px);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: right 0.4s ease;
+        z-index: 1000;
+        border-left: 1px solid rgba(255,255,255,0.05);
+        gap: 2rem;
+        padding-top: 60px; /* Space for X icon if needed */
+    }
+
+    .nav-links.active {
+        right: 0;
+    }
+
+    .nav-links li {
+        opacity: 0; /* Animate in */
+        transform: translateX(20px);
+    }
+    
+    .nav-links.active li {
+        animation: navLinkFade 0.5s ease forwards 0.3s;
+    }
+
+    /* Hero Section */
+    .hero {
+        flex-direction: column-reverse;
+        padding-top: 100px;
+        text-align: center;
+        gap: 2rem;
+    }
+
+    .hero-content {
+        width: 100%;
+    }
+
+    .hero-image-container {
+        width: 100%;
+    }
+
+    .profile-img {
+        width: 250px;
+        height: 250px;
+    }
+
+    .hero h1 {
+        font-size: 2.8rem;
+    }
+
+    /* Immersive Sections */
+    .immersive-section h2 {
+        font-size: 2.2rem;
+        margin-bottom: 2rem;
+    }
+
+    .skills-grid {
+        grid-template-columns: 1fr; /* Stack cards */
+    }
+
+    /* Projects */
+    .project-title {
+        font-size: 2.2rem;
+    }
+    
+    .project-tech {
+        justify-content: center;
+    }
+
+    /* Contact */
+    .contact-hero {
+        flex-direction: column;
+        padding-top: 100px;
+    }
+
+    .contact-hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .contact-visual {
+        display: none; /* Often cleaner to hide decorative images on mobile contact forms, or stack them */
+    }
+
+    .contact-content, .contact-form-container {
+        max-width: 100%;
+    }
+}
+
+@keyframes navLinkFade {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 

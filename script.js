@@ -61,3 +61,26 @@ progressItems.forEach((item, index) => {
     // Add pointer cursor style directly or via CSS
     item.style.cursor = 'pointer';
 });
+
+// Mobile Navigation Toggle
+const hamburger = document.querySelector('.hamburger');
+const navLinks = document.querySelector('.nav-links');
+const navLinksItems = document.querySelectorAll('.nav-links li');
+
+if (hamburger) {
+    hamburger.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        
+        // Hamburger Animation (Optional: turn into X)
+        hamburger.classList.toggle('toggle');
+    });
+}
+
+// Close mobile menu when a link is clicked
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+        if (navLinks.classList.contains('active')) {
+            navLinks.classList.remove('active');
+        }
+    });
+});
