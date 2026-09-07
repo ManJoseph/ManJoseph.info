@@ -152,15 +152,28 @@ const initDocViewer = () => {
 
     const applyZoom = () => {
         if (!canvasWrapper) return;
+        const isMobile = window.innerWidth <= 768;
+        const pct = Math.round(currentZoom * 100);
+
         if (currentZoom === 1) {
-            canvasWrapper.style.maxWidth = window.innerWidth <= 768 ? '100%' : '850px';
             canvasWrapper.style.width = '100%';
+            canvasWrapper.style.minWidth = 'auto';
+            canvasWrapper.style.maxWidth = isMobile ? '100%' : '850px';
         } else {
-            const base = window.innerWidth <= 768 ? Math.max(window.innerWidth - 20, 320) : 850;
-            canvasWrapper.style.maxWidth = 'none';
-            canvasWrapper.style.width = `${Math.round(base * currentZoom)}px`;
+            if (isMobile) {
+                // On mobile: expand past screen width using percentage so scroll triggers naturally
+                canvasWrapper.style.maxWidth = 'none';
+                canvasWrapper.style.width = `${pct}%`;
+                canvasWrapper.style.minWidth = `${pct}%`;
+            } else {
+                // On desktop: calculate based on 850px standard width
+                const pxWidth = Math.round(850 * currentZoom);
+                canvasWrapper.style.maxWidth = 'none';
+                canvasWrapper.style.width = `${pxWidth}px`;
+                canvasWrapper.style.minWidth = `${pxWidth}px`;
+            }
         }
-        const text = currentZoom === 1 ? 'Fit' : `${Math.round(currentZoom * 100)}%`;
+        const text = currentZoom === 1 ? 'Fit' : `${pct}%`;
         if (zoomResetBtn) zoomResetBtn.textContent = text;
         if (mobileZoomReset) mobileZoomReset.textContent = text;
     };
@@ -225,6 +238,7 @@ const initDocViewer = () => {
         currentDocPages = [];
         currentDocIndex = 0;
         currentZoom = 1;
+        applyZoom();
     };
 
     // Card click triggers
@@ -257,22 +271,17 @@ const initDocViewer = () => {
         }
     };
 
-    if (prevBtn) prevBtn.addEventListener('click', handlePrev);
-    if (nextBtn) nextBtn.addEventListener('click', handleNext);
-    if (mobilePrevBtn) mobilePrevBtn.addEventListener('click', handlePrev);
-    if (mobileNextBtn) mobileNextBtn.addEventListener('click', handleNext);
-
     // Zoom Handlers
     const handleZoomIn = () => {
         if (currentZoom < 2.5) {
-            currentZoom += 0.25;
+            currentZoom = Math.min(2.5, +(currentZoom + 0.25).toFixed(2));
             applyZoom();
         }
     };
 
     const handleZoomOut = () => {
-        if (currentZoom > 0.75) {
-            currentZoom -= 0.25;
+        if (currentZoom > 0.5) {
+            currentZoom = Math.max(0.5, +(currentZoom - 0.25).toFixed(2));
             applyZoom();
         }
     };
@@ -286,12 +295,26 @@ const initDocViewer = () => {
         }
     };
 
-    if (zoomInBtn) zoomInBtn.addEventListener('click', handleZoomIn);
-    if (zoomOutBtn) zoomOutBtn.addEventListener('click', handleZoomOut);
-    if (zoomResetBtn) zoomResetBtn.addEventListener('click', handleZoomReset);
-    if (mobileZoomIn) mobileZoomIn.addEventListener('click', handleZoomIn);
-    if (mobileZoomOut) mobileZoomOut.addEventListener('click', handleZoomOut);
-    if (mobileZoomReset) mobileZoomReset.addEventListener('click', handleZoomReset);
+    // Robust touch & click binder
+    const bindBtn = (btn, handler) => {
+        if (!btn) return;
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            handler();
+        });
+    };
+
+    bindBtn(prevBtn, handlePrev);
+    bindBtn(nextBtn, handleNext);
+    bindBtn(mobilePrevBtn, handlePrev);
+    bindBtn(mobileNextBtn, handleNext);
+
+    bindBtn(zoomInBtn, handleZoomIn);
+    bindBtn(zoomOutBtn, handleZoomOut);
+    bindBtn(zoomResetBtn, handleZoomReset);
+    bindBtn(mobileZoomIn, handleZoomIn);
+    bindBtn(mobileZoomOut, handleZoomOut);
+    bindBtn(mobileZoomReset, handleZoomReset);
 
     if (closeBtn) closeBtn.addEventListener('click', closeViewer);
 

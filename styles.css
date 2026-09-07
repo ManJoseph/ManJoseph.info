@@ -1579,28 +1579,32 @@ html, body, section, nav, .navbar, .skill-card, .skills-category-card, .project-
     gap: 6px;
 }
 
+.doc-ctrl-btn i {
+    pointer-events: none;
+}
+
 /* Document Body Viewport */
 .doc-modal-body {
     flex: 1;
     overflow: auto;
     -webkit-overflow-scrolling: touch;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 1.5rem 1rem 3.5rem;
+    padding: 1.25rem 0.75rem 3.5rem;
     position: relative;
     background: #080808;
     touch-action: pan-x pan-y;
+    text-align: center;
 }
 
 .doc-viewer-canvas-wrapper {
     position: relative;
-    display: block;
+    display: inline-block;
+    vertical-align: top;
+    text-align: left;
     margin: 0 auto;
     box-shadow: 0 15px 45px rgba(0, 0, 0, 0.85);
     border-radius: 6px;
     background: #111;
-    transition: width 0.2s ease-out;
+    transition: width 0.15s ease-out;
     width: 100%;
     max-width: 850px;
 }
@@ -1642,10 +1646,9 @@ html, body, section, nav, .navbar, .skill-card, .skills-category-card, .project-
         display: flex;
     }
     .doc-modal-body {
-        padding: 0.75rem 0.5rem 2.5rem;
+        padding: 0.6rem 0.4rem 3rem;
     }
     .doc-viewer-canvas-wrapper {
-        max-width: 100%;
         box-shadow: 0 8px 25px rgba(0, 0, 0, 0.9);
     }
     .cert-tabs {
