@@ -130,36 +130,90 @@ const initDocViewer = () => {
 
     const modalTitle = document.getElementById('docModalTitle');
     const modalImg = document.getElementById('docModalImg');
+    const modalBody = modal.querySelector('.doc-modal-body');
+    const canvasWrapper = modal.querySelector('.doc-viewer-canvas-wrapper');
+    const closeBtn = document.getElementById('docCloseBtn');
+
+    // Desktop controls
     const pageCounter = document.getElementById('docPageCounter');
     const prevBtn = document.getElementById('docPrevBtn');
     const nextBtn = document.getElementById('docNextBtn');
     const zoomInBtn = document.getElementById('docZoomIn');
     const zoomOutBtn = document.getElementById('docZoomOut');
     const zoomResetBtn = document.getElementById('docZoomReset');
-    const closeBtn = document.getElementById('docCloseBtn');
-    const modalBody = modal.querySelector('.doc-modal-body');
-    const canvasWrapper = modal.querySelector('.doc-viewer-canvas-wrapper');
+
+    // Mobile secondary bar controls
+    const mobilePageCounter = document.getElementById('docMobilePageCounter');
+    const mobilePrevBtn = document.getElementById('docMobilePrevBtn');
+    const mobileNextBtn = document.getElementById('docMobileNextBtn');
+    const mobileZoomIn = document.getElementById('docMobileZoomIn');
+    const mobileZoomOut = document.getElementById('docMobileZoomOut');
+    const mobileZoomReset = document.getElementById('docMobileZoomReset');
+
+    const applyZoom = () => {
+        if (!canvasWrapper) return;
+        if (currentZoom === 1) {
+            canvasWrapper.style.maxWidth = window.innerWidth <= 768 ? '100%' : '850px';
+            canvasWrapper.style.width = '100%';
+        } else {
+            const base = window.innerWidth <= 768 ? Math.max(window.innerWidth - 20, 320) : 850;
+            canvasWrapper.style.maxWidth = 'none';
+            canvasWrapper.style.width = `${Math.round(base * currentZoom)}px`;
+        }
+        const text = currentZoom === 1 ? 'Fit' : `${Math.round(currentZoom * 100)}%`;
+        if (zoomResetBtn) zoomResetBtn.textContent = text;
+        if (mobileZoomReset) mobileZoomReset.textContent = text;
+    };
 
     const updateDocView = () => {
         if (!currentDocPages.length) return;
         modalImg.src = currentDocPages[currentDocIndex];
-        currentZoom = 1;
-        if (canvasWrapper) canvasWrapper.style.transform = `scale(${currentZoom})`;
         
-        if (pageCounter) {
-            pageCounter.textContent = `Page ${currentDocIndex + 1} of ${currentDocPages.length}`;
-            pageCounter.style.display = currentDocPages.length > 1 ? 'inline-block' : 'none';
+        // Reset scroll position to top of document on every page switch
+        if (modalBody) {
+            modalBody.scrollTop = 0;
+            modalBody.scrollLeft = 0;
         }
-        if (prevBtn) prevBtn.disabled = currentDocIndex === 0;
-        if (nextBtn) nextBtn.disabled = currentDocIndex === currentDocPages.length - 1;
-        if (prevBtn) prevBtn.style.display = currentDocPages.length > 1 ? 'flex' : 'none';
-        if (nextBtn) nextBtn.style.display = currentDocPages.length > 1 ? 'flex' : 'none';
+
+        const isMulti = currentDocPages.length > 1;
+        const pageText = `Page ${currentDocIndex + 1} of ${currentDocPages.length}`;
+        
+        // Desktop sync
+        if (pageCounter) {
+            pageCounter.textContent = pageText;
+            pageCounter.style.display = isMulti ? 'inline-block' : 'none';
+        }
+        if (prevBtn) {
+            prevBtn.disabled = currentDocIndex === 0;
+            prevBtn.style.display = isMulti ? 'inline-flex' : 'none';
+        }
+        if (nextBtn) {
+            nextBtn.disabled = currentDocIndex === currentDocPages.length - 1;
+            nextBtn.style.display = isMulti ? 'inline-flex' : 'none';
+        }
+
+        // Mobile sync
+        if (mobilePageCounter) {
+            mobilePageCounter.textContent = pageText;
+        }
+        if (mobilePrevBtn) {
+            mobilePrevBtn.disabled = currentDocIndex === 0;
+        }
+        if (mobileNextBtn) {
+            mobileNextBtn.disabled = currentDocIndex === currentDocPages.length - 1;
+        }
+        const mobilePagesContainer = modal.querySelector('.doc-mobile-pages');
+        if (mobilePagesContainer) {
+            mobilePagesContainer.style.visibility = isMulti ? 'visible' : 'hidden';
+        }
     };
 
     const openViewer = (title, pages) => {
         currentDocPages = pages;
         currentDocIndex = 0;
+        currentZoom = 1;
         if (modalTitle) modalTitle.textContent = title;
+        applyZoom();
         updateDocView();
         modal.classList.add('open');
         document.body.style.overflow = 'hidden';
@@ -173,6 +227,7 @@ const initDocViewer = () => {
         currentZoom = 1;
     };
 
+    // Card click triggers
     document.querySelectorAll('.doc-view-trigger').forEach(trigger => {
         trigger.addEventListener('click', (e) => {
             e.preventDefault();
@@ -187,48 +242,56 @@ const initDocViewer = () => {
         });
     });
 
-    if (prevBtn) {
-        prevBtn.addEventListener('click', () => {
-            if (currentDocIndex > 0) {
-                currentDocIndex--;
-                updateDocView();
-            }
-        });
-    }
+    // Paging Handlers
+    const handlePrev = () => {
+        if (currentDocIndex > 0) {
+            currentDocIndex--;
+            updateDocView();
+        }
+    };
 
-    if (nextBtn) {
-        nextBtn.addEventListener('click', () => {
-            if (currentDocIndex < currentDocPages.length - 1) {
-                currentDocIndex++;
-                updateDocView();
-            }
-        });
-    }
+    const handleNext = () => {
+        if (currentDocIndex < currentDocPages.length - 1) {
+            currentDocIndex++;
+            updateDocView();
+        }
+    };
 
-    if (zoomInBtn) {
-        zoomInBtn.addEventListener('click', () => {
-            if (currentZoom < 2.5) {
-                currentZoom += 0.25;
-                if (canvasWrapper) canvasWrapper.style.transform = `scale(${currentZoom})`;
-            }
-        });
-    }
+    if (prevBtn) prevBtn.addEventListener('click', handlePrev);
+    if (nextBtn) nextBtn.addEventListener('click', handleNext);
+    if (mobilePrevBtn) mobilePrevBtn.addEventListener('click', handlePrev);
+    if (mobileNextBtn) mobileNextBtn.addEventListener('click', handleNext);
 
-    if (zoomOutBtn) {
-        zoomOutBtn.addEventListener('click', () => {
-            if (currentZoom > 0.75) {
-                currentZoom -= 0.25;
-                if (canvasWrapper) canvasWrapper.style.transform = `scale(${currentZoom})`;
-            }
-        });
-    }
+    // Zoom Handlers
+    const handleZoomIn = () => {
+        if (currentZoom < 2.5) {
+            currentZoom += 0.25;
+            applyZoom();
+        }
+    };
 
-    if (zoomResetBtn) {
-        zoomResetBtn.addEventListener('click', () => {
-            currentZoom = 1;
-            if (canvasWrapper) canvasWrapper.style.transform = `scale(1)`;
-        });
-    }
+    const handleZoomOut = () => {
+        if (currentZoom > 0.75) {
+            currentZoom -= 0.25;
+            applyZoom();
+        }
+    };
+
+    const handleZoomReset = () => {
+        currentZoom = 1;
+        applyZoom();
+        if (modalBody) {
+            modalBody.scrollTop = 0;
+            modalBody.scrollLeft = 0;
+        }
+    };
+
+    if (zoomInBtn) zoomInBtn.addEventListener('click', handleZoomIn);
+    if (zoomOutBtn) zoomOutBtn.addEventListener('click', handleZoomOut);
+    if (zoomResetBtn) zoomResetBtn.addEventListener('click', handleZoomReset);
+    if (mobileZoomIn) mobileZoomIn.addEventListener('click', handleZoomIn);
+    if (mobileZoomOut) mobileZoomOut.addEventListener('click', handleZoomOut);
+    if (mobileZoomReset) mobileZoomReset.addEventListener('click', handleZoomReset);
 
     if (closeBtn) closeBtn.addEventListener('click', closeViewer);
 
@@ -238,33 +301,33 @@ const initDocViewer = () => {
         }
     });
 
-    // Keyboard controls
-    document.addEventListener('keydown', (e) => {
-        if (!modal.classList.contains('open')) return;
-        if (e.key === 'Escape') closeViewer();
-        if (e.key === 'ArrowLeft' && currentDocIndex > 0) {
-            currentDocIndex--;
-            updateDocView();
-        }
-        if (e.key === 'ArrowRight' && currentDocIndex < currentDocPages.length - 1) {
-            currentDocIndex++;
-            updateDocView();
-        }
-        // Intercept save and print shortcuts
-        if ((e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'p' || e.key === 'u')) {
-            e.preventDefault();
-            return false;
-        }
-    });
-
-    // Disable right click inside modal to prevent saving
-    modal.addEventListener('contextmenu', (e) => {
-        e.preventDefault();
-        return false;
-    });
-
-    // Panning inside modal
+    // Mobile touch swipe for multi-page documents
+    let touchStartX = 0;
+    let touchStartY = 0;
     if (modalBody) {
+        modalBody.addEventListener('touchstart', (e) => {
+            if (e.touches.length === 1) {
+                touchStartX = e.touches[0].clientX;
+                touchStartY = e.touches[0].clientY;
+            }
+        }, { passive: true });
+
+        modalBody.addEventListener('touchend', (e) => {
+            if (currentZoom > 1.1) return; // Allow panning when zoomed
+            if (e.changedTouches.length === 1) {
+                const diffX = e.changedTouches[0].clientX - touchStartX;
+                const diffY = e.changedTouches[0].clientY - touchStartY;
+                if (Math.abs(diffX) > 60 && Math.abs(diffY) < 50) {
+                    if (diffX < 0) {
+                        handleNext();
+                    } else {
+                        handlePrev();
+                    }
+                }
+            }
+        }, { passive: true });
+
+        // Desktop mouse drag to pan when zoomed
         modalBody.addEventListener('mousedown', (e) => {
             if (currentZoom <= 1) return;
             isPanning = true;
@@ -282,12 +345,27 @@ const initDocViewer = () => {
             e.preventDefault();
             const x = e.pageX - modalBody.offsetLeft;
             const y = e.pageY - modalBody.offsetTop;
-            const walkX = (x - startX) * 1.5;
-            const walkY = (y - startY) * 1.5;
-            modalBody.scrollLeft = scrollLeft - walkX;
-            modalBody.scrollTop = scrollTop - walkY;
+            modalBody.scrollLeft = scrollLeft - (x - startX) * 1.5;
+            modalBody.scrollTop = scrollTop - (y - startY) * 1.5;
         });
     }
+
+    // Keyboard controls & shortcut security
+    document.addEventListener('keydown', (e) => {
+        if (!modal.classList.contains('open')) return;
+        if (e.key === 'Escape') closeViewer();
+        if (e.key === 'ArrowLeft') handlePrev();
+        if (e.key === 'ArrowRight') handleNext();
+        if ((e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'p' || e.key === 'u')) {
+            e.preventDefault();
+            return false;
+        }
+    });
+
+    modal.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+        return false;
+    });
 };
 
 const initCertTabs = () => {

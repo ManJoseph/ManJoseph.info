@@ -260,19 +260,37 @@
     <div id="docModal" class="doc-modal">
         <div class="doc-modal-header">
             <div class="doc-modal-title-area">
+                <i class="fa-solid fa-file-shield doc-modal-icon"></i>
                 <span id="docModalTitle" class="doc-modal-title">Credential Document</span>
             </div>
-            <div class="doc-modal-controls">
-                <button id="docPrevBtn" class="doc-ctrl-btn" title="Previous Page"><i class="fa-solid fa-chevron-left"></i></button>
-                <span id="docPageCounter" class="doc-page-counter">Page 1 of 1</span>
-                <button id="docNextBtn" class="doc-ctrl-btn" title="Next Page"><i class="fa-solid fa-chevron-right"></i></button>
-                <div style="width: 1px; height: 24px; background: rgba(255,255,255,0.1); margin: 0 4px;"></div>
-                <button id="docZoomOut" class="doc-ctrl-btn" title="Zoom Out"><i class="fa-solid fa-magnifying-glass-minus"></i></button>
-                <button id="docZoomReset" class="doc-ctrl-btn" title="Reset Zoom">100%</button>
-                <button id="docZoomIn" class="doc-ctrl-btn" title="Zoom In"><i class="fa-solid fa-magnifying-glass-plus"></i></button>
+            <div class="doc-modal-actions">
+                <div class="doc-modal-controls">
+                    <button id="docPrevBtn" class="doc-ctrl-btn" title="Previous Page"><i class="fa-solid fa-chevron-left"></i></button>
+                    <span id="docPageCounter" class="doc-page-counter">Page 1 of 1</span>
+                    <button id="docNextBtn" class="doc-ctrl-btn" title="Next Page"><i class="fa-solid fa-chevron-right"></i></button>
+                    <div class="doc-ctrl-divider"></div>
+                    <button id="docZoomOut" class="doc-ctrl-btn" title="Zoom Out"><i class="fa-solid fa-magnifying-glass-minus"></i></button>
+                    <button id="docZoomReset" class="doc-ctrl-btn doc-reset-btn" title="Fit to Width">Fit</button>
+                    <button id="docZoomIn" class="doc-ctrl-btn" title="Zoom In"><i class="fa-solid fa-magnifying-glass-plus"></i></button>
+                </div>
                 <button id="docCloseBtn" class="doc-close-btn" title="Close Viewer"><i class="fa-solid fa-xmark"></i></button>
             </div>
         </div>
+
+        <!-- Mobile Secondary Controls Bar -->
+        <div class="doc-mobile-bar">
+            <div class="doc-mobile-pages">
+                <button id="docMobilePrevBtn" class="doc-ctrl-btn"><i class="fa-solid fa-chevron-left"></i></button>
+                <span id="docMobilePageCounter" class="doc-page-counter">Page 1 of 1</span>
+                <button id="docMobileNextBtn" class="doc-ctrl-btn"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+            <div class="doc-mobile-zoom">
+                <button id="docMobileZoomOut" class="doc-ctrl-btn"><i class="fa-solid fa-minus"></i></button>
+                <button id="docMobileZoomReset" class="doc-ctrl-btn doc-reset-btn">Fit</button>
+                <button id="docMobileZoomIn" class="doc-ctrl-btn"><i class="fa-solid fa-plus"></i></button>
+            </div>
+        </div>
+
         <div class="doc-modal-body">
             <div class="doc-viewer-canvas-wrapper">
                 <div class="doc-security-shield"></div>
