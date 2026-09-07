@@ -1212,4 +1212,385 @@ html, body, section, nav, .navbar, .skill-card, .skills-category-card, .project-
     }
 }
 
+/* ==========================================
+   CERTIFICATES & PROTECTED DOCUMENT VIEWER
+   ========================================== */
+.cert-tabs {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-bottom: 2.5rem;
+}
+
+.tab-btn {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    color: var(--text-muted);
+    padding: 0.6rem 1.4rem;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.tab-btn:hover {
+    color: var(--text);
+    border-color: var(--accent);
+    background: rgba(46, 204, 113, 0.05);
+}
+
+.tab-btn.active {
+    color: var(--dark-bg);
+    background: var(--accent);
+    border-color: var(--accent);
+    box-shadow: 0 0 15px var(--accent-glow);
+}
+
+.doc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+}
+
+.doc-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+}
+
+.doc-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--accent);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+}
+
+.doc-thumb-container {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    background: #111;
+    overflow: hidden;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.doc-thumb-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    transition: transform 0.4s ease, filter 0.3s ease;
+    filter: brightness(0.9);
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.doc-card:hover .doc-thumb-img {
+    transform: scale(1.04);
+    filter: brightness(1);
+}
+
+.doc-thumb-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(10, 10, 10, 0.6);
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: var(--text);
+    transition: opacity 0.3s ease;
+    z-index: 2;
+}
+
+.doc-card:hover .doc-thumb-overlay {
+    opacity: 1;
+}
+
+.doc-thumb-overlay i {
+    font-size: 2rem;
+    color: var(--accent);
+}
+
+.doc-badges {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    display: flex;
+    gap: 8px;
+    z-index: 3;
+}
+
+.doc-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 0.5px;
+    backdrop-filter: blur(8px);
+}
+
+.doc-badge-protected {
+    background: rgba(46, 204, 113, 0.15);
+    color: var(--accent);
+    border: 1px solid var(--accent);
+}
+
+.doc-badge-pages {
+    background: rgba(0, 0, 0, 0.65);
+    color: var(--text-muted);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.doc-content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: space-between;
+}
+
+.doc-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.4rem;
+    line-height: 1.35;
+}
+
+.doc-issuer {
+    color: var(--accent);
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.doc-desc {
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    line-height: 1.5;
+    margin-bottom: 1.25rem;
+}
+
+.doc-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 0.75rem 1.25rem;
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--accent);
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.doc-btn:hover {
+    background: rgba(46, 204, 113, 0.12);
+    box-shadow: 0 0 15px var(--accent-glow);
+    color: var(--accent);
+}
+
+/* ==========================================
+   PROTECTED DOCUMENT VIEWER MODAL
+   ========================================== */
+.doc-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(5, 5, 5, 0.97);
+    backdrop-filter: blur(15px);
+    z-index: 9999;
+    display: none;
+    flex-direction: column;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.doc-modal.open {
+    display: flex;
+}
+
+.doc-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(10, 10, 10, 0.95);
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.doc-modal-title-area {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.doc-modal-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.doc-modal-badge {
+    background: rgba(46, 204, 113, 0.15);
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 50px;
+    font-family: 'Courier New', monospace;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.doc-modal-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.doc-ctrl-btn {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    color: var(--text);
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+}
+
+.doc-ctrl-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(46, 204, 113, 0.1);
+}
+
+.doc-ctrl-btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    border-color: var(--card-border);
+    color: var(--text-muted);
+}
+
+.doc-page-counter {
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    padding: 0 8px;
+    white-space: nowrap;
+}
+
+.doc-close-btn {
+    background: rgba(231, 76, 60, 0.15);
+    border: 1px solid rgba(231, 76, 60, 0.4);
+    color: #e74c3c;
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: all 0.2s ease;
+}
+
+.doc-close-btn:hover {
+    background: #e74c3c;
+    color: #fff;
+    box-shadow: 0 0 15px rgba(231, 76, 60, 0.4);
+}
+
+.doc-modal-body {
+    flex: 1;
+    overflow: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    position: relative;
+    cursor: grab;
+}
+
+.doc-modal-body:active {
+    cursor: grabbing;
+}
+
+.doc-viewer-canvas-wrapper {
+    position: relative;
+    display: inline-block;
+    max-width: 95%;
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.8);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: transform 0.2s ease-out;
+}
+
+.doc-viewer-img {
+    display: block;
+    max-height: 80vh;
+    max-width: 100%;
+    width: auto;
+    object-fit: contain;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
+}
+
+/* Invisible Security Shield over the rendered document */
+.doc-security-shield {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    background: transparent;
+    cursor: grab;
+}
+
+.doc-modal-body:active .doc-security-shield {
+    cursor: grabbing;
+}
+
+/* Strictly Block Printing of View-Only Documents */
+@media print {
+    body, .doc-modal, .doc-grid, .doc-card {
+        display: none !important;
+        visibility: hidden !important;
+    }
+}
+
+
 
